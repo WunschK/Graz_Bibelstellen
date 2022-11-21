@@ -62,4 +62,3 @@ nt_stellen = [ref for ref in Refs if ref['cref'].split('_')[0] not in AT]
 
 
 
-
