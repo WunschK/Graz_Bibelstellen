@@ -3,8 +3,6 @@
 import requests as r
 import bs4 as bs
 import pandas as pd
-
-import data_obtainer
 from pprint import pprint
 import csv
 
@@ -60,5 +58,66 @@ nt_stellen = [ref for ref in Refs if ref['cref'].split('_')[0] not in AT]
 
 
 
+#Probe-Sachen
+with open(f'interim2.xml', 'r') as f:
+    file = f.read()
+soup = bs.BeautifulSoup(file, 'lxml')
+Refs = soup.select('ref[cRef]')
 
+# Eine leere Liste wird erstellt und mit den Bibelstellen gefüllt. Hierbei wird sortiert, ob sie im Alten Testament stehen oder nicht.
+# Ein zweites Auswahlkriterium ist die Frage, ob direkt vor dem Eltern-ELement des <ref type='biblical'> ein <q> steht, und somit ein direktes Zitat vorliegt.
+data = []
+for ref in Refs:
+    if ref.get('cref').split('_')[0] in AT:
+        if ref.parent.find_previous_sibling() == ref.parent.find_previous_sibling('q'):
+            data.append((ref.get('cref') , 'at', ref.getText() , ref.parent.find_previous_sibling('q').get_text(' ',strip=True)))
+        else:
+            data.append((ref.get('cref'), 'at', ref.getText(), 'not a direct quote'))
+    else:
+        if ref.parent.find_previous_sibling() == ref.parent.find_previous_sibling('q'):
+            data.append((ref.get('cref') , 'nt', ref.getText() , ref.parent.find_previous_sibling('q').get_text(' ',strip=True)))
+        else:
+            data.append((ref.get('cref'), 'nt', ref.getText(), 'not a direct quote'))
+print(data[0])
+print(data[282])
+print(len(data))
+# der eigentliche Dataframe wird gesetzt
+df_data = pd.DataFrame(data)
+# der Header wird gesetzt.
+df_data.columns = ['kuerzel', 'atnt', 'stelle', 'zitat']
+
+
+
+stellen = []
+for i in range (0, len(df_data)):
+    #if df_data['zitat'][i] != 'not a direct quote':
+    stellen.append(df_data['stelle'][i])
+
+
+# Hier wird eine Liste der wörtlichen Zitate erstellt
+qs = []
+for ref in Refs:
+    if ref.parent.find_previous_sibling() == ref.parent.find_previous_sibling("q"):
+        qs.append(ref.parent.find_previous_sibling("q").get_text(" ", strip=True))
+
+
+# Zählen der Gesamtlänge des zitierten Textes; one Leerzeilen und Zeilenumbrüche
+quote_len = 0
+for i in range(len(qs)):
+    quote_len +=len(qs[i].replace(" ","").replace("\n", ""))
+    i+=1
+
+
+
+ges = bs.BeautifulSoup(file, 'lxml')
+
+ges_soup = ges.select('div')
+total_len=0
+for i in range(len(ges_soup)):
+    total_len += len(ges_soup[i].getText().replace(" ", "").replace("n", ""))
+print(f"Anzahl an erfassten Bibelstellen: {len(Refs)}")
+print(f"wörtliche Zitate: {len(qs)}")
+print("Gesamtlänge:" + str(total_len))
+print("Zitatlänge :"+str(quote_len))
+print("Prozentualer Anteil: " +(str(percent_calc(quote_len, total_len))))
 
