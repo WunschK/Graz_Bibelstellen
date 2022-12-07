@@ -1,7 +1,4 @@
-<!--<?xml-model href="../../../customization/schema_quellentexte/religionsfrieden-quellentexte.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?<?xml-model href=""http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>--><TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="pa000008-0129">
-   
-   
-   <teiHeader>      
+   <teiHeader>
       <fileDesc>         
          <titleStmt>
             <title level="s">Europäische Religionsfrieden Digital</title>
@@ -5312,7 +5309,7 @@
                <lb/>für</w> gehalten werden, das darumb die gar Jungen <w>Kin<pc>-</pc>
                <lb/>der</w> von disem Sacrament sollen abgetriben werden,
                <lb facs="#facs_37_r1l33" n="N013"/>Seitemal <rs type="person" ref="#jesus">Christus</rs> selbst nicht scheühet, ihnen die hende
-               <lb facs="#facs_37_r1l34" n="N014"/>auffzulegen,<note type="annotation">Vgl. <ref type="biblical" cRef="Mt_19,15">Mt 19,15</ref> par. <ref type="biblical" cRef="Mc_10,16">Mk 10,16</ref>.</note> dann man hiemit der Kirchen keyn maß <w>ge<pc>-</pc>
+               <lb facs="#facs_37_r1l34" n="N014"/>auffzulegen,<note type="annotation">Vgl. <ref type="biblical" cRef="Mt_19,15">Mt 19,15</ref> par. <ref type="biblical" cRef="Mc_10,16">10,16</ref>.</note> dann man hiemit der Kirchen keyn maß <w>ge<pc>-</pc>
                <lb/>ben</w> soll<note type="crit_app">Fehlt <rs type="bibl" ref="#mehlhausen_augsburger_interim"><surname type="editor">Mehlhausen</surname>, Augsburger Interim, S. 80</rs>.</note>.
             </p>
             <p facs="#facs_38_TextRegion_1624547426469_997">
