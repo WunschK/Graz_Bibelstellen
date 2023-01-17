@@ -1,5 +1,0 @@
-Anzahl an erfassten Bibelstellen: 283
-wörtliche Zitate: 114
-Gesamtlänge: 217866
-Zitatlänge :9720
-Prozentualer Anteil: 4.461457960397676
